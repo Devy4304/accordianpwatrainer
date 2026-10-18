@@ -378,6 +378,55 @@ html, body {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ar-view-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion-view-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.tuner-view-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bellows-lab-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .practice-stats-bar {
@@ -479,6 +528,9 @@ html, body {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .accordion-control-bar {
@@ -585,6 +637,9 @@ html, body {
 
 .accordion-playboard {
   flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   display: flex;
   overflow: hidden;
   touch-action: none;
@@ -1052,8 +1107,9 @@ html, body {
 /* ================= TUNER & REEDS VIEW ================= */
 .tuner-view-wrapper {
   padding: 16px;
-  overflow-y: auto;
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
 }
 
 .tuner-grid {
@@ -1259,8 +1315,9 @@ html, body {
 /* ================= BELLOWS LAB VIEW ================= */
 .bellows-lab-wrapper {
   padding: 16px;
-  overflow-y: auto;
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
   max-width: 900px;
   margin: 0 auto;
   display: flex;
@@ -1814,13 +1871,35 @@ html, body {
 /* Tablets and Mobile (< 768px) */
 @media (max-width: 768px) {
   .app-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     padding: 6px 10px;
-    gap: 8px;
-    flex-wrap: nowrap;
+    gap: 6px;
+    z-index: 50;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .app-brand {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .brand-icon {
+    font-size: 20px;
   }
 
   .brand-title {
-    font-size: 14px;
+    font-size: 13.5px;
+    font-weight: 700;
   }
 
   .brand-sub {
@@ -1830,11 +1909,13 @@ html, body {
   .header-selectors {
     display: flex;
     gap: 4px;
+    min-width: 0;
   }
 
   .selector-btn {
-    padding: 4px 8px;
+    padding: 4px 7px;
     font-size: 11px;
+    gap: 4px;
   }
 
   .sel-label {
@@ -1843,29 +1924,86 @@ html, body {
 
   .sel-value {
     font-size: 11px;
-    max-width: 80px;
+    max-width: 75px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .action-btn.icon-btn {
+    padding: 5px 7px;
+    font-size: 13px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-center {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    flex: 1 1 100%;
+    order: 3;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px 0;
+  }
+
+  .header-center::-webkit-scrollbar {
+    display: none;
+  }
+
   .transport-bar {
+    display: inline-flex;
+    align-items: center;
     gap: 4px;
     padding: 3px 6px;
+    min-width: max-content;
+    flex-shrink: 0;
   }
 
   .transport-btn {
     padding: 5px 8px;
     font-size: 11px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .speed-control-wrap {
-    display: none; /* Accessible in settings or practice view */
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 6px;
+    border-left: 1px solid var(--border-color);
+    flex-shrink: 0;
+  }
+
+  .speed-label {
+    font-size: 10.5px;
+    min-width: 24px;
+  }
+
+  .speed-slider {
+    width: 44px;
   }
 
   .next-note-pill {
     padding: 4px 8px;
-    gap: 4px;
+    gap: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .pill-label {
@@ -1873,11 +2011,23 @@ html, body {
   }
 
   .pill-note {
-    font-size: 13px;
+    font-size: 12.5px;
+  }
+
+  .pill-finger {
+    font-size: 9.5px;
+    padding: 1px 4px;
+  }
+
+  .pill-dir {
+    font-size: 8.5px;
+    padding: 1px 4px;
   }
 
   .practice-view-container {
     height: 100%;
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1918,72 +2068,142 @@ html, body {
   .waterfall-container {
     flex: 1;
     min-height: 110px;
-    max-height: 40vh;
+    max-height: 38vh;
   }
 
   .practice-virtual-strip {
     flex: 1.25;
     height: auto;
-    min-height: 180px;
+    min-height: 190px;
   }
 
   .accordion-control-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 4px 8px;
     gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .accordion-control-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hand-switch-group {
+    flex-shrink: 0;
+    gap: 1px;
+    padding: 1.5px;
   }
 
   .hand-tab {
-    padding: 3px 8px;
+    padding: 3.5px 8px;
     font-size: 10.5px;
+    white-space: nowrap;
+  }
+
+  .bellows-section {
+    flex-shrink: 0;
+    gap: 6px;
   }
 
   .bellows-direction-badge {
     font-size: 10px;
-    padding: 4px 8px;
+    padding: 3.5px 8px;
+    white-space: nowrap;
+  }
+
+  .bellows-pressure-wrap {
+    gap: 4px;
+    font-size: 10px;
   }
 
   .pressure-slider {
-    width: 60px;
+    width: 55px;
+  }
+
+  .accordion-badges {
+    flex-shrink: 0;
   }
 
   .accordion-badge {
-    display: none;
+    font-size: 10px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+
+  .section-title {
+    padding: 3px 6px;
+    gap: 6px;
+    font-size: 10px;
   }
 
   .circle-quick-jumps, .octave-quick-jumps {
-    max-width: 48%;
+    max-width: 55%;
+    gap: 2px;
   }
 
   .quick-root-chip, .quick-octave-chip {
-    padding: 1.5px 5px;
+    padding: 2px 5px;
     font-size: 8.5px;
   }
 
+  .accordion-view-container {
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .virtual-accordion-wrapper {
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .accordion-playboard {
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
   .piano-key.white-key {
-    min-width: 40px;
-    width: 42px;
-    padding-bottom: 6px;
-    font-size: 10.5px;
+    min-width: 44px;
+    width: 48px;
+    height: calc(100% - 6px);
+    min-height: 190px;
+    padding-bottom: 8px;
+    font-size: 11px;
   }
 
   .piano-key.black-key {
-    min-width: 25px;
-    width: 26px;
-    margin-left: -13px;
-    margin-right: -13px;
+    min-width: 27px;
+    width: 28px;
+    height: 60%;
+    margin-left: -14px;
+    margin-right: -14px;
+    font-size: 9px;
+  }
+
+  .stradella-grid {
+    height: calc(100% - 8px);
+    min-height: 190px;
+    gap: 5px;
   }
 
   .stradella-btn {
-    min-width: 42px;
-    width: 44px;
-    height: 38px;
-    font-size: 9.5px;
+    min-width: 44px;
+    width: 46px;
+    height: 40px;
+    font-size: 10px;
   }
 
   .cba-button, .diatonic-button {
-    width: 38px;
-    height: 38px;
-    font-size: 10px;
+    width: 42px;
+    height: 42px;
+    font-size: 10.5px;
   }
 
   .key-card-grid {
@@ -1991,8 +2211,24 @@ html, body {
     gap: 8px;
   }
 
+  .tuner-view-wrapper,
+  .bellows-lab-wrapper {
+    padding: 10px 8px;
+  }
+
   .tuner-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .pitch-note-badge {
+    width: 76px;
+    height: 76px;
+    font-size: 40px;
+  }
+
+  .lab-section {
+    padding: 12px 10px;
   }
 
   .diatonic-explainer-grid {
@@ -2026,7 +2262,7 @@ html, body {
   .action-btn.icon-btn {
     width: 32px;
     height: 32px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .next-note-pill {
@@ -2034,23 +2270,23 @@ html, body {
   }
 
   .piano-key.white-key {
-    min-width: 38px;
-    width: 40px;
-    font-size: 10px;
+    min-width: 42px;
+    width: 46px;
+    font-size: 10.5px;
   }
 
   .piano-key.black-key {
-    min-width: 24px;
-    width: 25px;
-    margin-left: -12.5px;
-    margin-right: -12.5px;
+    min-width: 25px;
+    width: 26px;
+    margin-left: -13px;
+    margin-right: -13px;
   }
 
   .stradella-btn {
-    min-width: 40px;
-    width: 42px;
-    height: 36px;
-    font-size: 9px;
+    min-width: 42px;
+    width: 44px;
+    height: 38px;
+    font-size: 9.5px;
   }
 }
 

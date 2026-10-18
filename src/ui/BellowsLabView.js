@@ -31,8 +31,12 @@ export class BellowsLabView {
           <div class="section-badge">1. Circle of Fifths (Stradella Left-Hand Layout)</div>
           <div class="circle-controls">
             <span class="info-text">Select a Root Key to see adjacent 4th (subdominant) and 5th (dominant) columns:</span>
-            <div class="circle-chips-scroll">
-              <div class="circle-chips" id="circle-chips"></div>
+            <div class="circle-nav-wrapper">
+              <button class="circle-arrow-btn" id="circle-prev-btn" title="Previous Key in Circle of 5ths">‹</button>
+              <div class="circle-chips-scroll" id="circle-chips-scroll">
+                <div class="circle-chips" id="circle-chips"></div>
+              </div>
+              <button class="circle-arrow-btn" id="circle-next-btn" title="Next Key in Circle of 5ths">›</button>
             </div>
           </div>
 
@@ -90,20 +94,39 @@ export class BellowsLabView {
     if (!chipsContainer) return;
 
     chipsContainer.innerHTML = '';
-    STRADELLA_CIRCLE_OF_FIFTHS.forEach(col => {
+    STRADELLA_CIRCLE_OF_FIFTHS.forEach((col, idx) => {
       const chip = document.createElement('button');
       chip.className = `circle-chip ${col.name === this.selectedKey ? 'active' : ''} ${col.isMarked ? 'is-marked' : ''}`;
       chip.textContent = col.name;
       chip.title = `Root ${col.name} (MIDI ${col.rootMidi})`;
+      chip.dataset.index = idx;
       chip.addEventListener('click', () => {
-        this.selectedKey = col.name;
-        this.container.querySelectorAll('.circle-chip').forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        this.updateKeyCard();
-        this.updatePatternTimeline();
+        this.selectKey(col.name);
       });
       chipsContainer.appendChild(chip);
     });
+
+    // Auto scroll active chip to center
+    this.centerActiveChip();
+  }
+
+  selectKey(keyName) {
+    this.selectedKey = keyName;
+    this.container.querySelectorAll('.circle-chip').forEach(c => {
+      c.classList.toggle('active', c.textContent === keyName);
+    });
+    this.updateKeyCard();
+    this.updatePatternTimeline();
+    this.centerActiveChip();
+  }
+
+  centerActiveChip() {
+    setTimeout(() => {
+      const activeChip = this.container.querySelector('.circle-chip.active');
+      if (activeChip) {
+        activeChip.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }
+    }, 50);
   }
 
   updateKeyCard() {
@@ -224,6 +247,24 @@ export class BellowsLabView {
   }
 
   attachEventListeners() {
+    // Circle of 5ths arrow buttons
+    const prevBtn = this.container.querySelector('#circle-prev-btn');
+    const nextBtn = this.container.querySelector('#circle-next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const colIdx = STRADELLA_CIRCLE_OF_FIFTHS.findIndex(c => c.name === this.selectedKey);
+        const newIdx = Math.max(0, colIdx - 1);
+        this.selectKey(STRADELLA_CIRCLE_OF_FIFTHS[newIdx].name);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const colIdx = STRADELLA_CIRCLE_OF_FIFTHS.findIndex(c => c.name === this.selectedKey);
+        const newIdx = Math.min(STRADELLA_CIRCLE_OF_FIFTHS.length - 1, colIdx + 1);
+        this.selectKey(STRADELLA_CIRCLE_OF_FIFTHS[newIdx].name);
+      });
+    }
+
     // Pattern selection buttons
     this.container.querySelectorAll('.pattern-btn').forEach(btn => {
       btn.addEventListener('click', () => {

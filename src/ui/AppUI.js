@@ -73,6 +73,9 @@ export class AppUI {
     if (this.virtualAccordion) {
       this.virtualAccordion.setModelData(this.currentAccordion, this.trebleKeys, this.bassGrid);
     }
+    if (this.miniVirtual) {
+      this.miniVirtual.setModelData(this.currentAccordion, this.trebleKeys, this.bassGrid);
+    }
     if (this.arTracker) {
       this.arTracker.setAccordionModel(this.currentAccordion, this.trebleKeys);
     }

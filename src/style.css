@@ -486,15 +486,54 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 6px 14px;
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Hand Mode Switcher */
+.hand-switch-group {
+  display: flex;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.hand-tab {
+  padding: 4px 11px;
+  border-radius: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hand-tab:hover {
+  color: var(--text-primary);
+}
+
+.hand-tab.active {
+  background: var(--accent-cyan);
+  color: #0f172a;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 .bellows-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .bellows-toggle-btn {
@@ -532,7 +571,7 @@ html, body {
 }
 
 .pressure-slider {
-  width: 80px;
+  width: 75px;
   accent-color: var(--accent-amber);
 }
 
@@ -549,6 +588,29 @@ html, body {
   display: flex;
   overflow: hidden;
   touch-action: none;
+  position: relative;
+}
+
+/* Accordion Mode Switch Configurations */
+.accordion-playboard.mode-treble .bass-board-container,
+.accordion-playboard.mode-treble .bellows-divider {
+  display: none !important;
+}
+
+.accordion-playboard.mode-treble .treble-board-container {
+  width: 100% !important;
+  flex: 1 !important;
+}
+
+.accordion-playboard.mode-bass .treble-board-container,
+.accordion-playboard.mode-bass .bellows-divider {
+  display: none !important;
+}
+
+.accordion-playboard.mode-bass .bass-board-container {
+  width: 100% !important;
+  flex: 1 !important;
+  border-right: none;
 }
 
 /* Left Hand Bass Board */
@@ -559,6 +621,7 @@ html, body {
   flex-direction: column;
   background: #111827;
   border-right: 2px solid #374151;
+  position: relative;
 }
 
 .section-title {
@@ -566,16 +629,67 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 4px 10px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.45);
   font-size: 11px;
   font-weight: 700;
   color: var(--text-secondary);
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.title-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .sub-title {
   font-size: 9px;
   color: var(--text-muted);
   font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Quick Jump Chips */
+.circle-quick-jumps, .octave-quick-jumps {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 60%;
+  padding: 2px 0;
+}
+
+.circle-quick-jumps::-webkit-scrollbar,
+.octave-quick-jumps::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-root-chip, .quick-octave-chip {
+  padding: 2px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.quick-root-chip:hover, .quick-octave-chip:hover,
+.quick-root-chip:active, .quick-octave-chip:active {
+  background: var(--accent-cyan);
+  color: #0f172a;
+  border-color: #ffffff;
+}
+
+.quick-root-chip.is-c-root {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
 }
 
 .bass-scroll-view {
@@ -585,6 +699,8 @@ html, body {
   padding: 8px 12px;
   display: flex;
   align-items: center;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .stradella-grid {
@@ -595,8 +711,9 @@ html, body {
 }
 
 .stradella-btn {
-  width: 44px;
-  height: 38px;
+  min-width: 44px;
+  width: 46px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid #4b5563;
   background: radial-gradient(circle at 35% 35%, #374151 0%, #1f2937 100%);
@@ -611,6 +728,7 @@ html, body {
   position: relative;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   transition: transform 0.05s, border-color 0.1s, box-shadow 0.1s;
+  touch-action: none;
 }
 
 .stradella-btn.row-fundamental {
@@ -711,8 +829,9 @@ html, body {
 }
 
 .piano-key.white-key {
-  width: 38px;
-  height: 96%;
+  min-width: 42px;
+  width: 44px;
+  height: 98%;
   background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 85%, #cbd5e1 100%);
   border: 1px solid #94a3b8;
   border-radius: 0 0 6px 6px;
@@ -724,19 +843,22 @@ html, body {
   color: #334155;
   font-weight: 700;
   font-size: 11px;
+  touch-action: none;
 }
 
 .piano-key.black-key {
-  width: 24px;
-  height: 60%;
+  min-width: 26px;
+  width: 28px;
+  height: 62%;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   border: 1px solid #475569;
   border-radius: 0 0 4px 4px;
-  margin-left: -12px;
-  margin-right: -12px;
+  margin-left: -14px;
+  margin-right: -14px;
   z-index: 2;
   color: #94a3b8;
   font-size: 9px;
+  touch-action: none;
 }
 
 .piano-key.is-active, .piano-key:active {
@@ -1179,10 +1301,43 @@ html, body {
   margin-bottom: 10px;
 }
 
+.circle-nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.circle-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--accent-cyan);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.circle-arrow-btn:hover, .circle-arrow-btn:active {
+  background: var(--accent-cyan);
+  color: #0f172a;
+  border-color: #ffffff;
+}
+
 .circle-chips-scroll {
+  flex: 1;
   overflow-x: auto;
   padding: 6px 0;
-  margin: 8px 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .circle-chips {
@@ -1192,21 +1347,24 @@ html, body {
 }
 
 .circle-chip {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   background: #0f172a;
   border: 1px solid #475569;
   color: #ffffff;
   font-weight: 700;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .circle-chip.active {
   background: var(--accent-cyan);
   color: #0f172a;
   border-color: #ffffff;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  transform: scale(1.05);
 }
 
 .circle-chip.is-marked {
@@ -1649,23 +1807,250 @@ html, body {
   100% { transform: scale(1.05); }
 }
 
-/* Responsive Breakpoints */
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS & MOBILE FIRST REVAMP
+   ========================================================================== */
+
+/* Tablets and Mobile (< 768px) */
 @media (max-width: 768px) {
   .app-header {
-    flex-wrap: wrap;
     padding: 6px 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
+
+  .brand-title {
+    font-size: 14px;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
   .header-selectors {
-    display: none; /* Accessible in bottom bar / dialogs */
+    display: flex;
+    gap: 4px;
   }
+
+  .selector-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .sel-label {
+    display: none;
+  }
+
+  .sel-value {
+    font-size: 11px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .transport-bar {
+    gap: 4px;
+    padding: 3px 6px;
+  }
+
+  .transport-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .speed-control-wrap {
+    display: none; /* Accessible in settings or practice view */
+  }
+
+  .next-note-pill {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .pill-label {
+    display: none;
+  }
+
+  .pill-note {
+    font-size: 13px;
+  }
+
+  .practice-view-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .practice-stats-bar {
+    padding: 4px 8px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .stat-pill {
+    padding: 3px 8px;
+    gap: 4px;
+  }
+
+  .stat-label {
+    font-size: 8.5px;
+  }
+
+  .stat-value {
+    font-size: 11.5px;
+  }
+
+  .stat-progress-wrap {
+    flex: 1 1 100%;
+    order: 5;
+    height: 4px;
+    margin: 2px 0;
+  }
+
+  .feedback-badge {
+    font-size: 10.5px;
+    padding: 2px 8px;
+  }
+
+  .waterfall-container {
+    flex: 1;
+    min-height: 110px;
+    max-height: 40vh;
+  }
+
+  .practice-virtual-strip {
+    flex: 1.25;
+    height: auto;
+    min-height: 180px;
+  }
+
+  .accordion-control-bar {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .hand-tab {
+    padding: 3px 8px;
+    font-size: 10.5px;
+  }
+
+  .bellows-direction-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .pressure-slider {
+    width: 60px;
+  }
+
+  .accordion-badge {
+    display: none;
+  }
+
+  .circle-quick-jumps, .octave-quick-jumps {
+    max-width: 48%;
+  }
+
+  .quick-root-chip, .quick-octave-chip {
+    padding: 1.5px 5px;
+    font-size: 8.5px;
+  }
+
+  .piano-key.white-key {
+    min-width: 40px;
+    width: 42px;
+    padding-bottom: 6px;
+    font-size: 10.5px;
+  }
+
+  .piano-key.black-key {
+    min-width: 25px;
+    width: 26px;
+    margin-left: -13px;
+    margin-right: -13px;
+  }
+
+  .stradella-btn {
+    min-width: 42px;
+    width: 44px;
+    height: 38px;
+    font-size: 9.5px;
+  }
+
+  .cba-button, .diatonic-button {
+    width: 38px;
+    height: 38px;
+    font-size: 10px;
+  }
+
+  .key-card-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .tuner-grid {
     grid-template-columns: 1fr;
   }
-  .key-card-grid {
+
+  .diatonic-explainer-grid {
     grid-template-columns: 1fr;
   }
-  .bass-board-container {
-    width: 46%;
+
+  .ar-controls-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 6px);
+  }
+}
+
+/* Small Smart Phones (< 480px) */
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 12.5px;
+  }
+
+  .header-left {
+    gap: 4px;
+  }
+
+  .header-right {
+    gap: 4px;
+  }
+
+  .action-btn.icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .next-note-pill {
+    padding: 3px 6px;
+  }
+
+  .piano-key.white-key {
+    min-width: 38px;
+    width: 40px;
+    font-size: 10px;
+  }
+
+  .piano-key.black-key {
+    min-width: 24px;
+    width: 25px;
+    margin-left: -12.5px;
+    margin-right: -12.5px;
+  }
+
+  .stradella-btn {
+    min-width: 40px;
+    width: 42px;
+    height: 36px;
+    font-size: 9px;
   }
 }
 
@@ -1981,4 +2366,51 @@ html, body {
   background: rgba(2, 132, 199, 0.15);
   color: var(--accent-cyan);
   box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .hand-switch-group {
+  background: #f1f5f9;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .hand-tab {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .hand-tab.active {
+  background: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.35);
+}
+
+[data-theme="light"] .circle-arrow-btn {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--accent-cyan);
+}
+
+[data-theme="light"] .circle-arrow-btn:hover,
+[data-theme="light"] .circle-arrow-btn:active {
+  background: var(--accent-cyan);
+  color: #ffffff;
+}
+
+[data-theme="light"] .quick-root-chip,
+[data-theme="light"] .quick-octave-chip {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .quick-root-chip:hover,
+[data-theme="light"] .quick-octave-chip:hover,
+[data-theme="light"] .quick-root-chip:active,
+[data-theme="light"] .quick-octave-chip:active {
+  background: var(--accent-cyan);
+  color: #ffffff;
+}
+
+[data-theme="light"] .quick-root-chip.is-c-root {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
 }

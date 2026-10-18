@@ -1,4 +1,5 @@
 // Interactive Virtual Accordion UI Component: Treble Keys, Stradella Bass Board & Bellows Control
+import { STRADELLA_CIRCLE_OF_FIFTHS } from '../models/AccordionModels.js';
 
 export class VirtualAccordionView {
   constructor(containerElement, audioEngine, options = {}) {
@@ -13,6 +14,11 @@ export class VirtualAccordionView {
     this.bellowsPressure = 1.0;
     this.activePointers = new Map(); // pointerId -> keyId
 
+    // Hand mode: 'both', 'treble', 'bass'
+    // Default to 'treble' on small screens if not explicitly passed
+    const isMobile = window.innerWidth <= 768;
+    this.handMode = options.handMode || (isMobile ? 'treble' : 'both');
+
     this.onKeyPlay = options.onKeyPlay || (() => {});
     this.onKeyRelease = options.onKeyRelease || (() => {});
     this.onBassPlay = options.onBassPlay || (() => {});
@@ -26,9 +32,67 @@ export class VirtualAccordionView {
     this.render();
   }
 
+  setHandMode(mode) {
+    this.handMode = mode;
+    const playboard = this.container.querySelector('.accordion-playboard');
+    if (playboard) {
+      playboard.className = `accordion-playboard mode-${mode}`;
+    }
+    this.container.querySelectorAll('.hand-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.hand === mode);
+    });
+
+    // Auto center current target or middle key when switching mode
+    setTimeout(() => {
+      this.centerCurrentFocus();
+    }, 120);
+  }
+
   setTargetKey(target) {
     this.targetKey = target;
     this.updateTargetHighlight();
+    this.centerTargetKey();
+  }
+
+  centerTargetKey() {
+    if (!this.targetKey) return;
+
+    // Center Treble
+    if (this.targetKey.keyId || this.targetKey.midi) {
+      const targetMidi = this.targetKey.midi;
+      const keyEl = this.container.querySelector(
+        this.targetKey.keyId
+          ? `[data-key-id="${this.targetKey.keyId}"]`
+          : `[data-midi="${targetMidi}"], [data-push-midi="${targetMidi}"], [data-pull-midi="${targetMidi}"]`
+      );
+      if (keyEl && keyEl.offsetParent !== null) {
+        keyEl.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }
+    }
+
+    // Center Bass
+    if (this.targetKey.bassId) {
+      const bassBtn = this.container.querySelector(`[data-bass-id*="${this.targetKey.bassId}"]`);
+      if (bassBtn && bassBtn.offsetParent !== null) {
+        bassBtn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }
+
+  centerCurrentFocus() {
+    if (this.targetKey) {
+      this.centerTargetKey();
+      return;
+    }
+    // Default center on middle C
+    const centerCKey = this.container.querySelector('[data-note="C4"], [data-note="C3"], .is-c-key');
+    if (centerCKey && centerCKey.offsetParent !== null) {
+      centerCKey.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
+    const centerCBass = this.container.querySelector('.is-marked-bass');
+    if (centerCBass && centerCBass.offsetParent !== null) {
+      centerCBass.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
   }
 
   setBellowsDirection(dir) {
@@ -37,9 +101,8 @@ export class VirtualAccordionView {
     const indicator = this.container.querySelector('.bellows-direction-badge');
     if (indicator) {
       indicator.className = `bellows-direction-badge ${dir}`;
-      indicator.innerHTML = dir === 'push' ? '⬅️ PUSH BELLOWS' : '➡️ PULL BELLOWS';
+      indicator.innerHTML = dir === 'push' ? '⬅️ PUSH' : '➡️ PULL';
     }
-    // Update diatonic button labels if bisonoric
     if (this.accordionModel?.isBisonoric) {
       this.updateDiatonicLabels();
     }
@@ -50,31 +113,50 @@ export class VirtualAccordionView {
       <div class="virtual-accordion-wrapper">
         <!-- Accordion Top Control Bar -->
         <div class="accordion-control-bar">
+          <!-- Hand View Mode Switcher -->
+          <div class="hand-switch-group">
+            <button class="hand-tab ${this.handMode === 'treble' ? 'active' : ''}" data-hand="treble" title="Full Right Hand Treble Keyboard">
+              🎹 Treble
+            </button>
+            <button class="hand-tab ${this.handMode === 'bass' ? 'active' : ''}" data-hand="bass" title="Full Left Hand Stradella Bass Matrix">
+              🔘 Bass
+            </button>
+            <button class="hand-tab ${this.handMode === 'both' ? 'active' : ''}" data-hand="both" title="Dual Hands Split View">
+              👐 Both
+            </button>
+          </div>
+
+          <!-- Bellows Direction & Pressure -->
           <div class="bellows-section">
             <button class="bellows-toggle-btn ${this.bellowsDirection}" id="bellows-toggle-btn" title="Toggle Push / Pull Bellows Direction">
               <span class="bellows-direction-badge ${this.bellowsDirection}">
-                ${this.bellowsDirection === 'push' ? '⬅️ PUSH BELLOWS' : '➡️ PULL BELLOWS'}
+                ${this.bellowsDirection === 'push' ? '⬅️ PUSH' : '➡️ PULL'}
               </span>
             </button>
             <div class="bellows-pressure-wrap">
-              <span class="pressure-label">🫁 Pressure</span>
-              <input type="range" class="pressure-slider" id="pressure-slider" min="0.3" max="1.6" step="0.05" value="1.0" />
+              <span class="pressure-label">🫁</span>
+              <input type="range" class="pressure-slider" id="pressure-slider" min="0.3" max="1.6" step="0.05" value="1.0" title="Bellows Air Pressure Dynamics" />
             </div>
           </div>
+
           <div class="accordion-badges">
-            <span class="accordion-badge model-badge">${this.accordionModel?.icon || '🪗'} ${this.accordionModel?.name || 'Piano Accordion'}</span>
+            <span class="accordion-badge model-badge">${this.accordionModel?.icon || '🪗'} ${this.accordionModel?.name?.split('(')[0]?.trim() || 'Piano Accordion'}</span>
           </div>
         </div>
 
         <!-- Accordion Split Playboard -->
-        <div class="accordion-playboard">
+        <div class="accordion-playboard mode-${this.handMode}">
           <!-- Left Hand: Stradella Bass Board -->
           <div class="bass-board-container" id="bass-board-container">
             <div class="section-title">
-              <span>Left Hand • Stradella Bass</span>
-              <span class="sub-title">Circle of 5ths</span>
+              <div class="title-left">
+                <span>Left Hand • Stradella Bass</span>
+                <span class="sub-title">Circle of 5ths Matrix</span>
+              </div>
+              <!-- Circle of 5ths Quick Navigation Jump Chips -->
+              <div class="circle-quick-jumps" id="circle-quick-jumps"></div>
             </div>
-            <div class="bass-scroll-view">
+            <div class="bass-scroll-view" id="bass-scroll-view">
               <div class="bass-matrix" id="bass-matrix"></div>
             </div>
           </div>
@@ -89,10 +171,14 @@ export class VirtualAccordionView {
           <!-- Right Hand: Treble Board (Piano Keys / Buttons) -->
           <div class="treble-board-container" id="treble-board-container">
             <div class="section-title">
-              <span>Right Hand • Treble Melody</span>
-              <span class="sub-title">${this.accordionModel?.trebleType === 'PIANO' ? 'Piano Keyboard' : 'Button Board'}</span>
+              <div class="title-left">
+                <span>Right Hand • Treble Melody</span>
+                <span class="sub-title">${this.accordionModel?.trebleType === 'PIANO' ? 'Piano Keyboard' : 'Button Board'}</span>
+              </div>
+              <!-- Quick Octave Jump Chips -->
+              <div class="octave-quick-jumps" id="octave-quick-jumps"></div>
             </div>
-            <div class="treble-scroll-view">
+            <div class="treble-scroll-view" id="treble-scroll-view">
               <div class="treble-keyboard ${this.accordionModel?.trebleType?.toLowerCase() || 'piano'}" id="treble-keyboard"></div>
             </div>
           </div>
@@ -102,7 +188,64 @@ export class VirtualAccordionView {
 
     this.renderTrebleKeys();
     this.renderBassButtons();
+    this.renderNavigationChips();
     this.attachEventListeners();
+
+    // Initial centering
+    setTimeout(() => {
+      this.centerCurrentFocus();
+    }, 150);
+  }
+
+  renderNavigationChips() {
+    // 1. Circle of 5ths quick jump chips for Bass
+    const circleJumpContainer = this.container.querySelector('#circle-quick-jumps');
+    if (circleJumpContainer && this.bassGrid) {
+      circleJumpContainer.innerHTML = '';
+      const commonRoots = ['Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B'];
+      commonRoots.forEach(root => {
+        const btn = document.createElement('button');
+        btn.className = `quick-root-chip ${root === 'C' ? 'is-c-root' : ''}`;
+        btn.textContent = root;
+        btn.title = `Jump to ${root} column in Circle of 5ths`;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetColBtn = this.container.querySelector(`.stradella-btn[data-bass-id^="${root}_"]`);
+          if (targetColBtn) {
+            targetColBtn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+          }
+        });
+        circleJumpContainer.appendChild(btn);
+      });
+    }
+
+    // 2. Octave quick jump chips for Treble
+    const octaveJumpContainer = this.container.querySelector('#octave-quick-jumps');
+    if (octaveJumpContainer && this.trebleKeys) {
+      octaveJumpContainer.innerHTML = '';
+      const octaves = [];
+      this.trebleKeys.forEach(k => {
+        const match = k.noteName.match(/^([A-G]#?)([0-9])$/);
+        if (match && match[1] === 'C' && !octaves.includes(match[2])) {
+          octaves.push(match[2]);
+        }
+      });
+
+      octaves.forEach(oct => {
+        const btn = document.createElement('button');
+        btn.className = 'quick-octave-chip';
+        btn.textContent = `C${oct}`;
+        btn.title = `Jump to Octave ${oct}`;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetKey = this.container.querySelector(`[data-note="C${oct}"]`);
+          if (targetKey) {
+            targetKey.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+          }
+        });
+        octaveJumpContainer.appendChild(btn);
+      });
+    }
   }
 
   renderTrebleKeys() {
@@ -130,7 +273,6 @@ export class VirtualAccordionView {
       });
     } else if (this.accordionModel?.trebleType?.startsWith('CBA')) {
       keyboardEl.className = 'treble-keyboard cba-layout';
-      // Group by row
       const rowsCount = this.accordionModel.rowsCount || 5;
       const rowsEls = [];
       for (let r = 0; r < rowsCount; r++) {
@@ -208,7 +350,6 @@ export class VirtualAccordionView {
     bassMatrixEl.innerHTML = '';
     const { rows, columns, buttons } = this.bassGrid;
 
-    // Render Row Headers
     const gridWrapper = document.createElement('div');
     gridWrapper.className = 'stradella-grid';
     gridWrapper.style.gridTemplateColumns = `repeat(${columns.length}, 1fr)`;
@@ -231,18 +372,9 @@ export class VirtualAccordionView {
     });
 
     bassMatrixEl.appendChild(gridWrapper);
-
-    // Auto scroll to center C
-    const centerC = gridWrapper.querySelector('.is-marked-bass');
-    if (centerC) {
-      setTimeout(() => {
-        centerC.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
-      }, 100);
-    }
   }
 
   updateTargetHighlight() {
-    // Clear previous targets
     this.container.querySelectorAll('.is-target-key').forEach(el => el.classList.remove('is-target-key'));
 
     if (!this.targetKey) return;
@@ -259,7 +391,7 @@ export class VirtualAccordionView {
       if (keyEl) keyEl.classList.add('is-target-key');
     }
 
-    // Highlight Bass button if specified in song
+    // Highlight Bass
     if (this.targetKey.bassId) {
       const bassBtn = this.container.querySelector(`[data-bass-id*="${this.targetKey.bassId}"]`);
       if (bassBtn) bassBtn.classList.add('is-target-key');
@@ -267,6 +399,14 @@ export class VirtualAccordionView {
   }
 
   attachEventListeners() {
+    // Hand Mode Switcher
+    this.container.querySelectorAll('.hand-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const hand = tab.dataset.hand;
+        this.setHandMode(hand);
+      });
+    });
+
     // Bellows Toggle
     const bellowsToggle = this.container.querySelector('#bellows-toggle-btn');
     if (bellowsToggle) {

@@ -11,7 +11,8 @@ export function registerPWA(onInstallAvailable = () => {}) {
 
   if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then((reg) => {
+      const swUrl = new URL('sw.js', window.location.href).href;
+      navigator.serviceWorker.register(swUrl).then((reg) => {
         console.log('Accordion PWA Service Worker registered:', reg.scope);
       }).catch((err) => {
         console.warn('PWA Service Worker registration failed:', err);

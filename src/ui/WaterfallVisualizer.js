@@ -60,13 +60,14 @@ export class WaterfallVisualizer {
     const whiteKeys = this.keysList.filter(k => !k.isBlack);
     const count = whiteKeys.length || 1;
     const laneWidth = width / count;
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
     for (let i = 0; i <= count; i++) {
       const x = i * laneWidth;
       this.ctx.beginPath();
       this.ctx.moveTo(x, 0);
       this.ctx.lineTo(x, height);
-      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      this.ctx.strokeStyle = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.05)';
       this.ctx.lineWidth = 1;
       this.ctx.stroke();
     }

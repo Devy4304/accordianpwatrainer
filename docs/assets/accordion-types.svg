@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <linearGradient id="badgeBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="badgePurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="badgeAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#fcd34d" />
+    </linearGradient>
+
+    <linearGradient id="badgeEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#6ee7b7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="320" rx="16" fill="#0b1120" stroke="#1e293b" stroke-width="1.5" />
+
+  <text x="550" y="40" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="800" text-anchor="middle">
+    SUPPORTED ACCORDION FAMILIES &amp; MATRICES
+  </text>
+  <text x="550" y="62" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400" text-anchor="middle">
+    Full Virtual Keyboards, AR Calibration &amp; Dynamic Acoustic Pitch Mappings
+  </text>
+
+  <!-- 4 Columns -->
+  <!-- Col 1: Piano Accordions -->
+  <g transform="translate(35, 85)">
+    <rect width="240" height="210" rx="10" fill="url(#pBg)" stroke="#38bdf8" stroke-width="1" />
+    <rect x="0" y="0" width="240" height="35" rx="10" fill="url(#badgeBlue)" />
+    <rect x="0" y="25" width="240" height="10" fill="url(#badgeBlue)" />
+    <text x="120" y="23" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">🎹 Piano Accordions</text>
+    
+    <text x="15" y="65" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● Full Concert 41 / 120</text>
+    <text x="25" y="82" fill="#94a3b8" font-family="sans-serif" font-size="11">F2 - A6 (3+ octaves range)</text>
+
+    <text x="15" y="110" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● Compact 34 / 72</text>
+    <text x="25" y="127" fill="#94a3b8" font-family="sans-serif" font-size="11">G2 - E5 (popular travel size)</text>
+
+    <text x="15" y="155" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● Student 26 / 48</text>
+    <text x="25" y="172" fill="#94a3b8" font-family="sans-serif" font-size="11">B2 - C5 (beginner layout)</text>
+
+    <text x="120" y="198" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle">Standard Linear Treble</text>
+  </g>
+
+  <!-- Col 2: Chromatic Button Accordions -->
+  <g transform="translate(295, 85)">
+    <rect width="240" height="210" rx="10" fill="url(#pBg)" stroke="#a855f7" stroke-width="1" />
+    <rect x="0" y="0" width="240" height="35" rx="10" fill="url(#badgePurple)" />
+    <rect x="0" y="25" width="240" height="10" fill="url(#badgePurple)" />
+    <text x="120" y="23" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">🔘 Chromatic Button (CBA)</text>
+    
+    <text x="15" y="65" fill="#c084fc" font-family="sans-serif" font-size="12" font-weight="700">● C-System Layout</text>
+    <text x="25" y="82" fill="#94a3b8" font-family="sans-serif" font-size="11">C in row 1 (Italian/French)</text>
+
+    <text x="15" y="110" fill="#c084fc" font-family="sans-serif" font-size="12" font-weight="700">● B-System Layout (Bayan)</text>
+    <text x="25" y="127" fill="#94a3b8" font-family="sans-serif" font-size="11">B in row 1 (Russian/East Euro)</text>
+
+    <text x="15" y="155" fill="#c084fc" font-family="sans-serif" font-size="12" font-weight="700">● 5-Row Isomorphic Grid</text>
+    <text x="25" y="172" fill="#94a3b8" font-family="sans-serif" font-size="11">Auxiliary rows for easy fingering</text>
+
+    <text x="120" y="198" fill="#c084fc" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle">Minor 3rd Diagonals</text>
+  </g>
+
+  <!-- Col 3: Diatonic Melodeons -->
+  <g transform="translate(555, 85)">
+    <rect width="240" height="210" rx="10" fill="url(#pBg)" stroke="#fbbf24" stroke-width="1" />
+    <rect x="0" y="0" width="240" height="35" rx="10" fill="url(#badgeAmber)" />
+    <rect x="0" y="25" width="240" height="10" fill="url(#badgeAmber)" />
+    <text x="120" y="23" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">🪗 Diatonic Melodeons</text>
+    
+    <text x="15" y="65" fill="#fcd34d" font-family="sans-serif" font-size="12" font-weight="700">● 3-Row GCF (Norteño)</text>
+    <text x="25" y="82" fill="#94a3b8" font-family="sans-serif" font-size="11">Tex-Mex / Vallenato / Folk</text>
+
+    <text x="15" y="110" fill="#fcd34d" font-family="sans-serif" font-size="12" font-weight="700">● 2-Row GC (Celtic/French)</text>
+    <text x="25" y="127" fill="#94a3b8" font-family="sans-serif" font-size="11">Traditional Irish &amp; BalFolk</text>
+
+    <text x="15" y="155" fill="#fcd34d" font-family="sans-serif" font-size="12" font-weight="700">● 1-Row Cajun / Quebec</text>
+    <text x="25" y="172" fill="#94a3b8" font-family="sans-serif" font-size="11">4-stop acoustic voicing</text>
+
+    <text x="120" y="198" fill="#fcd34d" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle">Bisonoric Push/Pull Physics</text>
+  </g>
+
+  <!-- Col 4: Stradella Bass Matrix -->
+  <g transform="translate(815, 85)">
+    <rect width="250" height="210" rx="10" fill="url(#pBg)" stroke="#34d399" stroke-width="1" />
+    <rect x="0" y="0" width="250" height="35" rx="10" fill="url(#badgeEmerald)" />
+    <rect x="0" y="25" width="250" height="10" fill="url(#badgeEmerald)" />
+    <text x="125" y="23" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">🎼 Stradella Bass Matrix</text>
+    
+    <text x="15" y="65" fill="#6ee7b7" font-family="sans-serif" font-size="12" font-weight="700">● Circle of Fifths Layout</text>
+    <text x="25" y="82" fill="#94a3b8" font-family="sans-serif" font-size="11">... Bb - F - C - G - D - A - E ...</text>
+
+    <text x="15" y="110" fill="#6ee7b7" font-family="sans-serif" font-size="12" font-weight="700">● 6 Vertical Chord Rows</text>
+    <text x="25" y="127" fill="#94a3b8" font-family="sans-serif" font-size="11">Counter, Fund, Maj, Min, 7th, Dim</text>
+
+    <text x="15" y="155" fill="#6ee7b7" font-family="sans-serif" font-size="12" font-weight="700">● Oom-Pah Accompaniment</text>
+    <text x="25" y="172" fill="#94a3b8" font-family="sans-serif" font-size="11">Polyphonic chord voicings</text>
+
+    <text x="125" y="198" fill="#6ee7b7" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle">Automated Left-Hand Guide</text>
+  </g>
+</svg>

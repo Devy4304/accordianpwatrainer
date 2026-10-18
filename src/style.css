@@ -1668,3 +1668,317 @@ html, body {
     width: 46%;
   }
 }
+
+/* ==========================================================================
+   THEME SELECTOR & LIGHT MODE DESIGN SYSTEM
+   ========================================================================== */
+.theme-options-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.theme-choice-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.theme-choice-btn.active {
+  border-color: var(--accent-cyan);
+  background: rgba(2, 132, 199, 0.25);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+[data-theme="light"],
+:root.theme-light {
+  --bg-dark: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-header: rgba(255, 255, 255, 0.94);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent-cyan: #0284c7;
+  --accent-blue: #0369a1;
+  --accent-amber: #d97706;
+  --accent-orange: #ea580c;
+  --accent-emerald: #059669;
+  --accent-rose: #e11d48;
+  --border-color: rgba(148, 163, 184, 0.35);
+  --border-active: rgba(2, 132, 199, 0.8);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .brand-title {
+  background: linear-gradient(135deg, #0284c7, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .brand-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+[data-theme="light"] .transport-bar {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .main-play-btn {
+  color: #ffffff;
+}
+
+[data-theme="light"] .main-play-btn.is-playing {
+  background: var(--accent-amber);
+  color: #0f172a;
+}
+
+[data-theme="light"] .practice-stats-bar {
+  background: rgba(241, 245, 249, 0.95);
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .stat-pill {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .progress-bar-track {
+  background: #cbd5e1;
+}
+
+[data-theme="light"] .waterfall-container {
+  background: radial-gradient(circle at 50% 100%, #e2e8f0 0%, #f8fafc 100%);
+}
+
+[data-theme="light"] .practice-virtual-strip {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .next-note-pill {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: var(--accent-cyan);
+}
+
+[data-theme="light"] .pill-note {
+  color: #0f172a;
+}
+
+[data-theme="light"] .accordion-control-bar {
+  background: rgba(241, 245, 249, 0.95);
+}
+
+[data-theme="light"] .accordion-badge {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+[data-theme="light"] .bass-board-container {
+  background: #f1f5f9;
+  border-right-color: var(--border-color);
+}
+
+[data-theme="light"] .treble-board-container {
+  background: #f8fafc;
+}
+
+[data-theme="light"] .piano-keyboard-wrap {
+  background: #e2e8f0;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .piano-key.white-key {
+  background: #ffffff;
+  color: #1e293b;
+  border-color: #cbd5e1;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .piano-key.black-key {
+  background: #1e293b;
+  color: #f8fafc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .cba-grid-container,
+[data-theme="light"] .diatonic-grid-container {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .cba-button.white-button {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .cba-button.black-button {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+[data-theme="light"] .stradella-grid-scroll {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .stradella-btn.row-counter {
+  background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] .stradella-btn.row-fundamental {
+  background: radial-gradient(circle at 35% 35%, #38bdf8 0%, #0284c7 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] .stradella-btn.row-major {
+  background: radial-gradient(circle at 35% 35%, #34d399 0%, #059669 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] .stradella-btn.row-minor {
+  background: radial-gradient(circle at 35% 35%, #fbbf24 0%, #d97706 100%);
+  color: #0f172a;
+}
+
+[data-theme="light"] .stradella-btn.row-seventh {
+  background: radial-gradient(circle at 35% 35%, #f472b6 0%, #db2777 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] .stradella-btn.row-dim {
+  background: radial-gradient(circle at 35% 35%, #c084fc 0%, #9333ea 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] .pitch-gauge-card {
+  background: #ffffff;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .cents-bar-track {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .cents-bar-center {
+  background: #64748b;
+}
+
+[data-theme="light"] .pitch-gauge-circle {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+[data-theme="light"] .pitch-gauge-note {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .register-item {
+  background: #f8fafc;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .register-item:hover {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .register-item.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: var(--accent-cyan);
+}
+
+[data-theme="light"] .circle-chip {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .circle-chip.active {
+  background: var(--accent-cyan);
+  color: #ffffff;
+  border-color: var(--accent-cyan);
+}
+
+[data-theme="light"] .pattern-card {
+  background: #f8fafc;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .lab-step-bubble {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .lab-step-bubble .step-num {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+[data-theme="light"] .lab-sample-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .lab-sample-btn:hover {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .lab-sample-btn.primary {
+  background: var(--accent-blue);
+  color: #ffffff;
+  border-color: var(--accent-cyan);
+}
+
+[data-theme="light"] .song-card,
+[data-theme="light"] .accordion-select-card {
+  background: #f8fafc;
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .acc-card-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .song-card:hover,
+[data-theme="light"] .accordion-select-card:hover {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .song-card.selected,
+[data-theme="light"] .accordion-select-card.selected {
+  border-color: var(--accent-cyan);
+  background: rgba(2, 132, 199, 0.1);
+}
+
+[data-theme="light"] .summary-item {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .meta-badge,
+[data-theme="light"] .tag-badge {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+[data-theme="light"] .ar-floating-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .theme-choice-btn.active {
+  border-color: var(--accent-cyan);
+  background: rgba(2, 132, 199, 0.15);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+}

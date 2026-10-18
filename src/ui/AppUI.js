@@ -31,16 +31,27 @@ export class AppUI {
     this.pwaInstaller = null;
     this.isMicActive = false;
     this.isArActive = false;
+    this.currentTheme = localStorage.getItem('accordion_trainer_theme') || 'dark';
   }
 
   init(pwaInstaller) {
     this.pwaInstaller = pwaInstaller;
     this.loadAccordionData(this.currentAccordion);
     this.renderBaseLayout();
+    this.applyTheme(this.currentTheme);
     this.initComponents();
     this.setupPracticeSubscriptions();
     this.setupPitchSubscriptions();
     this.attachGlobalEvents();
+
+    // Listen to system color scheme changes if set to auto/system
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+        if (this.currentTheme === 'system') {
+          this.applyTheme('system');
+        }
+      });
+    }
   }
 
   loadAccordionData(model) {
@@ -141,6 +152,9 @@ export class AppUI {
             </button>
 
             <!-- Global Action Buttons -->
+            <button class="action-btn icon-btn" id="btn-theme-toggle" title="Toggle Light / Dark Mode">
+              <span id="hdr-theme-icon">☀️</span>
+            </button>
             <button class="action-btn icon-btn" id="btn-toggle-mic" title="Toggle Microphone Pitch Detection">
               🎤 <span class="badge-dot" id="mic-status-dot"></span>
             </button>
@@ -295,6 +309,15 @@ export class AppUI {
               <button class="modal-close-btn" id="modal-settings-close">✕</button>
             </div>
             <div class="modal-body settings-body" id="modal-settings-body">
+              <div class="settings-group">
+                <h4>🎨 Visual Appearance</h4>
+                <p>Select interface color theme:</p>
+                <div class="theme-options-row">
+                  <button class="action-btn theme-choice-btn" id="btn-theme-dark" data-theme-val="dark">🌙 Dark</button>
+                  <button class="action-btn theme-choice-btn" id="btn-theme-light" data-theme-val="light">☀️ Light</button>
+                  <button class="action-btn theme-choice-btn" id="btn-theme-auto" data-theme-val="system">💻 System</button>
+                </div>
+              </div>
               <div class="settings-group">
                 <h4>🎛️ Audio Synthesizer Volume</h4>
                 <input type="range" id="synth-volume" min="0" max="1" step="0.05" value="0.85" />
@@ -555,6 +578,22 @@ export class AppUI {
       });
     }
 
+    // Theme Toggle Header Button
+    const themeBtn = this.app.querySelector('#btn-theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        this.toggleTheme();
+      });
+    }
+
+    // Theme Choice Buttons (in Settings modal)
+    this.app.querySelectorAll('.theme-choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const themeVal = btn.dataset.themeVal;
+        this.applyTheme(themeVal);
+      });
+    });
+
     // Speed Slider
     const speedSlider = this.app.querySelector('#speed-slider');
     const speedDisplay = this.app.querySelector('#speed-display');
@@ -801,6 +840,47 @@ export class AppUI {
         this.audioEngine.setVolume(parseFloat(e.target.value));
       });
     }
+  }
+
+  applyTheme(themeName) {
+    this.currentTheme = themeName;
+    try {
+      localStorage.setItem('accordion_trainer_theme', themeName);
+    } catch (e) {
+      // ignore in private browsing/storage disabled
+    }
+
+    let effective = themeName;
+    if (themeName === 'system') {
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      effective = prefersLight ? 'light' : 'dark';
+    }
+
+    document.documentElement.setAttribute('data-theme', effective);
+    document.documentElement.classList.toggle('theme-light', effective === 'light');
+
+    const themeIcon = this.app.querySelector('#hdr-theme-icon');
+    const themeBtn = this.app.querySelector('#btn-theme-toggle');
+    if (themeIcon) {
+      themeIcon.textContent = effective === 'light' ? '🌙' : '☀️';
+    }
+    if (themeBtn) {
+      themeBtn.title = effective === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+    }
+
+    this.app.querySelectorAll('.theme-choice-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.themeVal === themeName);
+    });
+  }
+
+  toggleTheme() {
+    let effective = this.currentTheme;
+    if (this.currentTheme === 'system') {
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      effective = prefersLight ? 'light' : 'dark';
+    }
+    const next = effective === 'light' ? 'dark' : 'light';
+    this.applyTheme(next);
   }
 
   closeModals() {

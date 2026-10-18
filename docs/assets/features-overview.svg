@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="headerBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="headerPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+
+    <linearGradient id="headerEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <linearGradient id="headerAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="380" rx="16" fill="#0b1120" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Section Title -->
+  <text x="550" y="45" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" text-anchor="middle" letter-spacing="0.5">
+    SYSTEM ARCHITECTURE &amp; CAPABILITIES
+  </text>
+  <text x="550" y="70" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400" text-anchor="middle">
+    High-Performance Zero-Dependency Client-Side Signal Processing
+  </text>
+
+  <!-- 4 Architecture Cards -->
+  <!-- Card 1: Computer Vision & AR -->
+  <g transform="translate(40, 100)" filter="url(#cardShadow)">
+    <rect width="230" height="240" rx="12" fill="url(#cardBg)" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Header banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 218 0 Q 230 0 230 12 L 230 45 L 0 45 Z" fill="url(#headerBlue)" />
+    <text x="115" y="28" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">📸 AR Key Vision</text>
+    
+    <!-- Body list items -->
+    <text x="20" y="75" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● 4-Point Homography</text>
+    <text x="32" y="93" fill="#cbd5e1" font-family="sans-serif" font-size="11">Perspective warping grid</text>
+
+    <text x="20" y="123" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● Optical Flow &amp; Delta</text>
+    <text x="32" y="141" fill="#cbd5e1" font-family="sans-serif" font-size="11">Real-time key press tracking</text>
+
+    <text x="20" y="171" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="700">● Holographic Previews</text>
+    <text x="32" y="189" fill="#cbd5e1" font-family="sans-serif" font-size="11">Next-note glow &amp; finger #</text>
+
+    <text x="20" y="219" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="600">⚡ 60 FPS WebRTC Canvas</text>
+  </g>
+
+  <!-- Card 2: Acoustic Pitch Engine -->
+  <g transform="translate(295, 100)" filter="url(#cardShadow)">
+    <rect width="230" height="240" rx="12" fill="url(#cardBg)" stroke="#818cf8" stroke-width="1.5" />
+    <!-- Header banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 218 0 Q 230 0 230 12 L 230 45 L 0 45 Z" fill="url(#headerPurple)" />
+    <text x="115" y="28" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">🎙️ Pitch Detection</text>
+    
+    <!-- Body list items -->
+    <text x="20" y="75" fill="#a855f7" font-family="sans-serif" font-size="12" font-weight="700">● Autocorrelation (YIN)</text>
+    <text x="32" y="93" fill="#cbd5e1" font-family="sans-serif" font-size="11">Fundamental freq tracking</text>
+
+    <text x="20" y="123" fill="#a855f7" font-family="sans-serif" font-size="12" font-weight="700">● Parabolic Sub-Bin</text>
+    <text x="32" y="141" fill="#cbd5e1" font-family="sans-serif" font-size="11">&lt; 1 cent pitch precision</text>
+
+    <text x="20" y="171" fill="#a855f7" font-family="sans-serif" font-size="12" font-weight="700">● Chromatic Tuner</text>
+    <text x="32" y="189" fill="#cbd5e1" font-family="sans-serif" font-size="11">Hz &amp; cents offset gauge</text>
+
+    <text x="20" y="219" fill="#a855f7" font-family="sans-serif" font-size="11" font-weight="600">⚡ AudioContext Input</text>
+  </g>
+
+  <!-- Card 3: Multi-Reed Sound Synthesis -->
+  <g transform="translate(550, 100)" filter="url(#cardShadow)">
+    <rect width="230" height="240" rx="12" fill="url(#cardBg)" stroke="#34d399" stroke-width="1.5" />
+    <!-- Header banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 218 0 Q 230 0 230 12 L 230 45 L 0 45 Z" fill="url(#headerEmerald)" />
+    <text x="115" y="28" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">🎵 Multi-Reed Synth</text>
+    
+    <!-- Body list items -->
+    <text x="20" y="75" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="700">● 7 Reed Registers</text>
+    <text x="32" y="93" fill="#cbd5e1" font-family="sans-serif" font-size="11">Master, Musette, Bandoneon...</text>
+
+    <text x="20" y="123" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="700">● Stradella Bass Voicing</text>
+    <text x="32" y="141" fill="#cbd5e1" font-family="sans-serif" font-size="11">Fundamental + Maj/Min/7th</text>
+
+    <text x="20" y="171" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="700">● Bellows Dynamics</text>
+    <text x="32" y="189" fill="#cbd5e1" font-family="sans-serif" font-size="11">Pressure &amp; tremolo simulation</text>
+
+    <text x="20" y="219" fill="#34d399" font-family="sans-serif" font-size="11" font-weight="600">⚡ Polyphonic Web Audio</text>
+  </g>
+
+  <!-- Card 4: Practice & Training Engine -->
+  <g transform="translate(805, 100)" filter="url(#cardShadow)">
+    <rect width="230" height="240" rx="12" fill="url(#cardBg)" stroke="#fbbf24" stroke-width="1.5" />
+    <!-- Header banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 218 0 Q 230 0 230 12 L 230 45 L 0 45 Z" fill="url(#headerAmber)" />
+    <text x="115" y="28" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">🎯 Practice Engines</text>
+    
+    <!-- Body list items -->
+    <text x="20" y="75" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="700">● "Wait for Me" Mode</text>
+    <text x="32" y="93" fill="#cbd5e1" font-family="sans-serif" font-size="11">Step-by-step key validation</text>
+
+    <text x="20" y="123" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="700">● 60 FPS Waterfall Flow</text>
+    <text x="32" y="141" fill="#cbd5e1" font-family="sans-serif" font-size="11">Rhythm tiles &amp; scoring</text>
+
+    <text x="20" y="171" fill="#fbbf24" font-family="sans-serif" font-size="12" font-weight="700">● Song Library</text>
+    <text x="32" y="189" fill="#cbd5e1" font-family="sans-serif" font-size="11">Folk, Classical &amp; Tangos</text>
+
+    <text x="20" y="219" fill="#fbbf24" font-family="sans-serif" font-size="11" font-weight="600">⚡ Guide Audio Previews</text>
+  </g>
+</svg>

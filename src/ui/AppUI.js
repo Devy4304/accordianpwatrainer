@@ -215,23 +215,36 @@ export class AppUI {
                 <canvas class="ar-canvas" id="ar-canvas"></canvas>
               </div>
 
-              <!-- AR Floating Floating Controls Panel -->
-              <div class="ar-floating-panel">
-                <div class="ar-controls-row">
-                  <button class="action-btn" id="btn-toggle-ar-cam">📷 Start AR Camera</button>
-                  <button class="action-btn" id="btn-switch-camera">🔄 Flip Cam</button>
-                  <button class="action-btn" id="btn-toggle-mirror">🪞 Mirror</button>
-                  <button class="action-btn" id="btn-toggle-calibration">📐 Calibrate Pins</button>
-                  <div class="preset-selector">
-                    <span class="preset-label">Alignment Preset:</span>
-                    <button class="preset-btn" data-preset="vertical">Vertical</button>
-                    <button class="preset-btn" data-preset="horizontal">Horizontal</button>
-                    <button class="preset-btn" data-preset="slanted">Slanted</button>
+              <!-- AR Floating Floating Controls Panel (Collapsible) -->
+              <div class="ar-floating-panel" id="ar-floating-panel">
+                <div class="ar-panel-header" id="ar-panel-header">
+                  <div class="ar-panel-title">
+                    <span class="ar-panel-icon">📐</span>
+                    <span class="ar-panel-heading">AR Camera & Calibration</span>
                   </div>
+                  <button class="ar-panel-toggle-btn" id="btn-toggle-ar-panel" title="Collapse Controls (Show full screen)" aria-label="Toggle AR controls panel" aria-expanded="true">
+                    <span class="ar-toggle-text">Collapse</span>
+                    <span class="ar-toggle-arrow">▼</span>
+                  </button>
                 </div>
-                <p class="ar-help-text">
-                  ✨ <strong>AR Key Guide:</strong> Align the amber corner pins over your real accordion's keyboard. Glowing holographic badges indicate the exact key to play!
-                </p>
+
+                <div class="ar-panel-content" id="ar-panel-content">
+                  <div class="ar-controls-row">
+                    <button class="action-btn" id="btn-toggle-ar-cam">📷 Start AR Camera</button>
+                    <button class="action-btn" id="btn-switch-camera">🔄 Flip Cam</button>
+                    <button class="action-btn" id="btn-toggle-mirror">🪞 Mirror</button>
+                    <button class="action-btn" id="btn-toggle-calibration">📐 Calibrate Pins</button>
+                    <div class="preset-selector">
+                      <span class="preset-label">Alignment Preset:</span>
+                      <button class="preset-btn" data-preset="vertical">Vertical</button>
+                      <button class="preset-btn" data-preset="horizontal">Horizontal</button>
+                      <button class="preset-btn" data-preset="slanted">Slanted</button>
+                    </div>
+                  </div>
+                  <p class="ar-help-text">
+                    ✨ <strong>AR Key Guide:</strong> Align the amber corner pins over your real accordion's keyboard. Glowing holographic badges indicate the exact key to play!
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -688,6 +701,38 @@ export class AppUI {
         this.arTracker.resetCalibrationPreset(preset);
       });
     });
+
+    // AR Floating Controls Panel Collapse / Expand toggle
+    const arPanel = this.app.querySelector('#ar-floating-panel');
+    const toggleArPanelBtn = this.app.querySelector('#btn-toggle-ar-panel');
+    const arPanelHeader = this.app.querySelector('#ar-panel-header');
+    if (arPanel && toggleArPanelBtn) {
+      const togglePanel = (e) => {
+        if (e) e.stopPropagation();
+        const isCollapsed = arPanel.classList.toggle('collapsed');
+        toggleArPanelBtn.setAttribute('aria-expanded', !isCollapsed);
+        const toggleText = toggleArPanelBtn.querySelector('.ar-toggle-text');
+        const toggleArrow = toggleArPanelBtn.querySelector('.ar-toggle-arrow');
+        if (toggleText) toggleText.textContent = isCollapsed ? 'Controls' : 'Collapse';
+        if (toggleArrow) toggleArrow.textContent = isCollapsed ? '▲' : '▼';
+        toggleArPanelBtn.title = isCollapsed ? 'Expand Controls' : 'Collapse Controls (Show full screen)';
+      };
+
+      toggleArPanelBtn.addEventListener('click', togglePanel);
+      if (arPanelHeader) {
+        arPanelHeader.addEventListener('click', (e) => {
+          // If clicked in header while collapsed, or clicked directly
+          if (arPanel.classList.contains('collapsed')) {
+            togglePanel(e);
+          }
+        });
+      }
+      arPanel.addEventListener('click', (e) => {
+        if (arPanel.classList.contains('collapsed')) {
+          togglePanel(e);
+        }
+      });
+    }
 
     // Modal Close buttons
     this.app.querySelectorAll('.modal-close-btn').forEach(btn => {

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="bellowsGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="36" fill="url(#bgGrad)" />
+  <!-- Accordion Body -->
+  <!-- Left Bass Section -->
+  <rect x="28" y="44" width="28" height="104" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="2.5" />
+  <circle cx="36" cy="62" r="3.5" fill="#f8fafc" />
+  <circle cx="48" cy="62" r="3.5" fill="#f8fafc" />
+  <circle cx="36" cy="78" r="3.5" fill="#f8fafc" />
+  <circle cx="48" cy="78" r="3.5" fill="#f59e0b" />
+  <circle cx="36" cy="94" r="3.5" fill="#f8fafc" />
+  <circle cx="48" cy="94" r="3.5" fill="#f8fafc" />
+  <circle cx="36" cy="110" r="3.5" fill="#f8fafc" />
+  <circle cx="48" cy="110" r="3.5" fill="#f8fafc" />
+  <circle cx="36" cy="126" r="3.5" fill="#f8fafc" />
+  <circle cx="48" cy="126" r="3.5" fill="#f8fafc" />
+
+  <!-- Center Bellows -->
+  <g fill="none" stroke="url(#bellowsGrad)" stroke-width="3" stroke-linecap="round">
+    <path d="M 60 48 L 68 56 L 60 64 L 68 72 L 60 80 L 68 88 L 60 96 L 68 104 L 60 112 L 68 120 L 60 128 L 68 136 L 60 144" />
+    <path d="M 74 48 L 82 56 L 74 64 L 82 72 L 74 80 L 82 88 L 74 96 L 82 104 L 74 112 L 82 120 L 74 128 L 82 136 L 74 144" />
+    <path d="M 88 48 L 96 56 L 88 64 L 96 72 L 88 80 L 96 88 L 88 96 L 96 104 L 88 112 L 96 120 L 88 128 L 96 136 L 88 144" />
+    <path d="M 102 48 L 110 56 L 102 64 L 110 72 L 102 80 L 110 88 L 102 96 L 110 104 L 102 112 L 110 120 L 102 128 L 110 136 L 102 144" />
+    <path d="M 116 48 L 124 56 L 116 64 L 124 72 L 116 80 L 124 88 L 116 96 L 124 104 L 116 112 L 124 120 L 116 128 L 124 136 L 116 144" />
+  </g>
+
+  <!-- Right Treble Section -->
+  <rect x="128" y="44" width="36" height="104" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="2.5" />
+  <!-- Piano Keys -->
+  <rect x="142" y="50" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="60" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="70" width="18" height="8" rx="1.5" fill="#38bdf8" />
+  <rect x="142" y="80" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="90" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="100" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="110" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="120" width="18" height="8" rx="1.5" fill="#ffffff" />
+  <rect x="142" y="130" width="18" height="8" rx="1.5" fill="#ffffff" />
+
+  <!-- Black keys -->
+  <rect x="136" y="55" width="10" height="5" rx="1" fill="#0f172a" />
+  <rect x="136" y="65" width="10" height="5" rx="1" fill="#0f172a" />
+  <rect x="136" y="85" width="10" height="5" rx="1" fill="#0f172a" />
+  <rect x="136" y="95" width="10" height="5" rx="1" fill="#0f172a" />
+  <rect x="136" y="105" width="10" height="5" rx="1" fill="#0f172a" />
+  <rect x="136" y="125" width="10" height="5" rx="1" fill="#0f172a" />
+
+  <!-- AR Target Hologram Sparkle -->
+  <circle cx="152" cy="74" r="7" fill="none" stroke="#f59e0b" stroke-width="2" />
+  <path d="M 152 63 L 152 69 M 152 79 L 152 85 M 141 74 L 147 74 M 157 74 L 163 74" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad512" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="bellowsGrad512" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bgGrad512)" />
+  <!-- Accordion Body -->
+  <!-- Left Bass Section -->
+  <rect x="75" y="115" width="75" height="280" rx="16" fill="#1e293b" stroke="#64748b" stroke-width="6" />
+  <circle cx="95" cy="165" r="9" fill="#f8fafc" />
+  <circle cx="127" cy="165" r="9" fill="#f8fafc" />
+  <circle cx="95" cy="205" r="9" fill="#f8fafc" />
+  <circle cx="127" cy="205" r="9" fill="#f59e0b" />
+  <circle cx="95" cy="245" r="9" fill="#f8fafc" />
+  <circle cx="127" cy="245" r="9" fill="#f8fafc" />
+  <circle cx="95" cy="285" r="9" fill="#f8fafc" />
+  <circle cx="127" cy="285" r="9" fill="#f8fafc" />
+  <circle cx="95" cy="325" r="9" fill="#f8fafc" />
+  <circle cx="127" cy="325" r="9" fill="#f8fafc" />
+
+  <!-- Center Bellows -->
+  <g fill="none" stroke="url(#bellowsGrad512)" stroke-width="8" stroke-linecap="round">
+    <path d="M 160 125 L 180 145 L 160 165 L 180 185 L 160 205 L 180 225 L 160 245 L 180 265 L 160 285 L 180 305 L 160 325 L 180 345 L 160 365 L 180 385" />
+    <path d="M 200 125 L 220 145 L 200 165 L 220 185 L 200 205 L 220 225 L 200 245 L 220 265 L 200 285 L 220 305 L 200 325 L 220 345 L 200 365 L 220 385" />
+    <path d="M 240 125 L 260 145 L 240 165 L 260 185 L 240 205 L 260 225 L 240 245 L 260 265 L 240 285 L 260 305 L 240 325 L 260 345 L 240 365 L 260 385" />
+    <path d="M 280 125 L 300 145 L 280 165 L 300 185 L 280 205 L 300 225 L 280 245 L 300 265 L 280 285 L 300 305 L 280 325 L 300 345 L 280 365 L 300 385" />
+    <path d="M 320 125 L 340 145 L 320 165 L 340 185 L 320 205 L 340 225 L 320 245 L 340 265 L 320 285 L 340 305 L 320 325 L 340 345 L 320 365 L 340 385" />
+  </g>
+
+  <!-- Right Treble Section -->
+  <rect x="345" y="115" width="95" height="280" rx="16" fill="#1e293b" stroke="#64748b" stroke-width="6" />
+  <!-- Piano Keys -->
+  <rect x="380" y="130" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="160" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="190" width="50" height="22" rx="4" fill="#38bdf8" />
+  <rect x="380" y="220" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="250" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="280" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="310" width="50" height="22" rx="4" fill="#ffffff" />
+  <rect x="380" y="340" width="50" height="22" rx="4" fill="#ffffff" />
+
+  <!-- Black keys -->
+  <rect x="365" y="145" width="28" height="14" rx="3" fill="#0f172a" />
+  <rect x="365" y="175" width="28" height="14" rx="3" fill="#0f172a" />
+  <rect x="365" y="235" width="28" height="14" rx="3" fill="#0f172a" />
+  <rect x="365" y="265" width="28" height="14" rx="3" fill="#0f172a" />
+  <rect x="365" y="295" width="28" height="14" rx="3" fill="#0f172a" />
+
+  <!-- AR Target Hologram Sparkle -->
+  <circle cx="405" cy="201" r="18" fill="none" stroke="#f59e0b" stroke-width="4" />
+  <path d="M 405 173 L 405 188 M 405 214 L 405 229 M 377 201 L 392 201 M 418 201 L 433 201" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+</svg>
